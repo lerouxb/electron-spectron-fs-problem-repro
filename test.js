@@ -1,20 +1,14 @@
-const { Application } = require('spectron');
+const { _electron: electron } = require('playwright');
 const path = require('path');
 
 (async function() {
-    const app = new Application({
-        path: require('electron'),
-        args: [path.join(__dirname, 'main.js')]
+    const electronApp = await electron.launch({ args: ['main.js'] });
+
+    const page = await electronApp.firstWindow();
+
+    page.on('console', (message) => {
+      console.log(message);
     });
-  
-    await app.start();
-    
-    setInterval(async() => {
-      const logs = await app.client.getMainProcessLogs();
-      if (logs.length > 0) 
-        console.log(logs);
-    }, 1000)
-  
-    return app;
+
+    return electronApp;
   })()
-  

@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^13.5.1",
-    "spectron": "^15.0.0"
+    "electron": "^13.5.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.16.3"
   }
 }
